@@ -1,23 +1,12 @@
-from .models import SaleProducts,Sale
+from .models import ExpenseTransaction
 from ra.admin.admin import ra_admin_site, EntityAdmin, TransactionAdmin, TransactionItemAdmin
 from django import forms
 
-class SaleProductsInline(TransactionItemAdmin):
-    model = SaleProducts
-    fields = ('price', 'quantity', 'roi')
-    extra = 1
+class GeneralTransactionAdmin(TransactionAdmin):
+    model = ExpenseTransaction
+    list_display = [ 'customer_id', 'employee', 'value','creation_date','status','percent_per_month','payout','amount_left']
+    fields = [ 'customer_id', 'employee', 'value','doc_date','status','percent_per_month','amount_left', 'notes']
+    list_display_links = ('customer_id', 'employee')
+    search_fields = ('customer_id', 'notes')
 
-class SaleAdmin(TransactionAdmin):
-    model = Sale
-    inlines = [SaleProductsInline]
-    fields = ['slug', 'doc_date', 'customer', 'seller']
-    copy_to_formset = ['customer', 'seller']
-    add_form_template = change_form_template = 'erplogic/admin/sales_change_form.html'
-
-    def formfield_for_dbfield(self, db_field, request, **kwargs):
-        formfield = super().formfield_for_dbfield(db_field, request, **kwargs)
-        if db_field.name == 'value':
-            formfield.widget = forms.TextInput(attrs={'readonly': 'readonly'})
-        return formfield
-
-ra_admin_site.register(Sale, SaleAdmin)
+ra_admin_site.register(ExpenseTransaction, GeneralTransactionAdmin)

@@ -8,24 +8,28 @@ from ra.base.registry import register_doc_type
 from django.utils.translation import ugettext_lazy as _
 
 
-class Sale(TransactionModel):
-    customer         = models.ForeignKey(Customer, related_name='forex_customer', blank=True, null=True,on_delete=models.CASCADE)
-    seller           = models.ForeignKey(Employee, related_name='forex_seller', blank=True, null=True,on_delete=models.CASCADE)
-    status           = models.CharField(max_length=32, choices=(('order_submitted','order_submitted'),
-        ('roi started','roi started'),
+class ExpenseTransaction(TransactionModel):
+    customer_id         = models.CharField(max_length=256, blank=True, null=True)
+    employee           = models.ForeignKey(Employee, related_name='Forex_transaction_employee', blank=True, null=True,on_delete=models.CASCADE)
+    status           = models.CharField(max_length=32, choices=(('unpaid','unpaid'),
+        ('partial','partial'),
         ('completed','completed')
         ), blank=True)
+    percent_per_month = models.DecimalField(max_digits=5, decimal_places=2)
+    sponsor = models.ForeignKey(Customer, related_name='Forex_transaction_sponsor', null=True, blank=True, on_delete=models.CASCADE)
+    amount_left = models.IntegerField(default=0)
+    account_type = models.CharField(max_length=32)
+    account_number = models.CharField(max_length=32)
+    user_id = models.CharField(max_length=32)
+    amount_left = models.FloatField(default=0)
+
+
+    def payout(self):
+        return self.percent_per_month * self.value / 100
 
     class Meta:
-        verbose_name = _('Sale')
-        verbose_name_plural = _('Sales')
+        verbose_name = _('Forex Transaction')
+        verbose_name_plural = _('Forex Transactions')
 
-class SaleProducts(QuantitativeTransactionItemModel):
-    sale         = models.ForeignKey(Sale, related_name='forex_sale', blank=True, null=True,on_delete=models.CASCADE)
-    date_added   = models.DateField(blank=True, null=True)
-    slug         = models.CharField(max_length=255, blank=True, null=True)
-    roi          = models.DecimalField(blank=True, null=True, max_digits=3, decimal_places=2)
-
-    class Meta:
-        verbose_name = _('Total amount')
-        verbose_name_plural = _('total amount')
+    def __str__(self):
+        return self.customer

@@ -21,6 +21,10 @@ class ExpenseTransaction(TransactionModel):
     account_type = models.CharField(max_length=32)
     account_number = models.CharField(max_length=32)
     user_id = models.CharField(max_length=32)
+    type = models.CharField(max_length=32, choices=(('cheque','cheque'),
+        ('credit','credit'),
+        ('debit','debit')
+        ), blank=True, null=True)
 
 
     def payout(self):

@@ -14,18 +14,25 @@ class ExpenseTransaction(TransactionModel):
     status           = models.CharField(max_length=32, choices=(('unpaid','unpaid'),
         ('partial','partial'),
         ('completed','completed')
-        ), blank=True)
-    percent_per_month = models.DecimalField(max_digits=5, decimal_places=2)
+        ), blank=True, null=True)
+    percent_per_month = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     sponsor = models.ForeignKey(Customer, related_name='general_transaction_sponsor', null=True, blank=True, on_delete=models.CASCADE)
     amount_left = models.IntegerField(default=0)
     type = models.CharField(max_length=32, choices=(('cheque','cheque'),
         ('credit','credit'),
         ('debit','debit')
-        ), blank=True)
+        ), blank=True, null=True)
 
-    # def payout(self):
-    # 	return self.percent_per_month * self.value / 100
+    def payout(self):
+        try:
+            a = self.percent_per_month * self.value / 100
+        except Exception as e:
+            a = 0
+        return a
 
     class Meta:
         verbose_name = _('General Transaction')
         verbose_name_plural = _('General Transactions')
+
+    # def __str__(self):
+    #     return self.customer

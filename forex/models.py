@@ -9,13 +9,13 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class ExpenseTransaction(TransactionModel):
-    customer         = models.ForeignKey(Customer, related_name='Forex_transaction_employee', blank=True, null=True,on_delete=models.CASCADE)
+    customer         = models.CharField(max_length=200, null=True)
     employee           = models.ForeignKey(Employee, related_name='Forex_transaction_employee', blank=True, null=True,on_delete=models.CASCADE)
     status           = models.CharField(max_length=32, choices=(('unpaid','unpaid'),
         ('partial','partial'),
         ('completed','completed')
         ), blank=True)
-    percent_per_month = models.DecimalField(max_digits=5, decimal_places=2)
+    percent_per_month = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     sponsor = models.ForeignKey(Customer, related_name='Forex_transaction_sponsor', null=True, blank=True, on_delete=models.CASCADE)
     amount_left = models.IntegerField(default=0)
     account_type = models.CharField(max_length=32)
@@ -29,6 +29,3 @@ class ExpenseTransaction(TransactionModel):
     class Meta:
         verbose_name = _('Forex Transaction')
         verbose_name_plural = _('Forex Transactions')
-
-    def __str__(self):
-        return self.customer.name

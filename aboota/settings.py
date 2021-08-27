@@ -193,7 +193,7 @@ LOCALE_PATHS = (
 import dj_database_url
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://dbmasteruser:pb2d80740f512c8cb41341e3291ed05b6b3d480a@ls-26c3c66a14c09165edc6eeda05430679af394976.cz4lglmvud83.ap-south-1.rds.amazonaws.com:5432/postgres',
+        default='postgres://dbmasteruser:pb2d80740f512c8cb41341e3291ed05b6b3d480a@ls-1468c763199ae0ba2f22ee8130f91a969a593c56.cz4lglmvud83.ap-south-1.rds.amazonaws.com:5432/postgres',
         conn_max_age=600)}
 
 

@@ -10,6 +10,7 @@ class Category(models.Model):
     name             = models.CharField(max_length=255, blank=True, null=True) 
     description      = models.TextField(blank=True, null=True)
     slug             = models.CharField(max_length=255, blank=True, null=True)
+    total_plots      = models.IntegerField(default=0)
 
     class Meta:
         verbose_name = _('Project')
@@ -18,40 +19,22 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-class Item(models.Model):
-    colony      = models.ForeignKey(Category, blank=True, null=True,on_delete=models.CASCADE)
-    address     = models.CharField(max_length=255, blank=True, null=True) 
-    code         = models.CharField(max_length=255, blank=True, null=True) 
-    orginal_price = models.DecimalField(default="0.00",max_digits=12,decimal_places=2)
-    sale_price    = models.DecimalField(default="0.00",max_digits=12,decimal_places=2)
-    date_added    = models.DateField( blank=True, null=True)
-    slug          = models.CharField(max_length=255, blank=True, null=True)
+class ExpenseTransaction(TransactionModel):
+    customer         = models.CharField(max_length=256, blank=True, null=True)
+    employee           = models.ForeignKey(Employee, related_name='dholera_transaction_employee', blank=True, null=True,on_delete=models.CASCADE)
+    status           = models.CharField(max_length=32, choices=(('unpaid','unpaid'),
+        ('partial','partial'),
+        ('completed','completed')
+        ), blank=True, null=True)
+    sponsor = models.ForeignKey(Customer, related_name='dholera_transaction_sponsor', null=True, blank=True, on_delete=models.CASCADE)
+    amount_left = models.IntegerField(default=0)
+    type = models.CharField(max_length=32, choices=(('cheque','cheque'),
+        ('credit','credit'),
+        ('debit','debit')
+        ), blank=True, null=True)
+    project = models.ForeignKey(Category, on_delete=models.CASCADE)
+    plot_number = models.IntegerField(default=0)
 
     class Meta:
-        verbose_name = _('Plot')
-        verbose_name_plural = _('Plots')
-
-
-class Sale(TransactionModel):
-    customer_id        = models.CharField(max_length=255, blank=True, null=True)
-    employee           = models.ForeignKey(Employee, blank=True, null=True,on_delete=models.CASCADE)
-    status           = models.CharField(max_length=32, choices=(('order_submitted','order_submitted'),
-        ('shipping_registry','shipping_registry'),
-        ('completed','completed'),
-        ('back','back'),
-        ('order_cancel','order_cancel')
-        ), blank=True)
-
-    class Meta:
-        verbose_name = _('Sale')
-        verbose_name_plural = _('Sales')
-
-class SaleProducts(QuantitativeTransactionItemModel):
-    sale         = models.ForeignKey(Sale, blank=True, null=True,on_delete=models.CASCADE)
-    plot         = models.ForeignKey(Item, blank=True, null=True,on_delete=models.CASCADE)
-    date_added   = models.DateField( blank=True, null=True)
-    slug         = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        verbose_name = _('Plot Sold')
-        verbose_name_plural = _('Plots Sold')
+        verbose_name = _('Dholera Transaction')
+        verbose_name_plural = _('Dholera Transactions')

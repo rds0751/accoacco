@@ -29,6 +29,3 @@ class ExpenseTransaction(TransactionModel):
     class Meta:
         verbose_name = _('General Transaction')
         verbose_name_plural = _('General Transactions')
-
-    def __str__(self):
-        return self.type

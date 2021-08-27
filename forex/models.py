@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class ExpenseTransaction(TransactionModel):
-    customer_id         = models.CharField(max_length=256, blank=True, null=True)
+    customer         = models.ForeignKey(Customer, related_name='Forex_transaction_employee', blank=True, null=True,on_delete=models.CASCADE)
     employee           = models.ForeignKey(Employee, related_name='Forex_transaction_employee', blank=True, null=True,on_delete=models.CASCADE)
     status           = models.CharField(max_length=32, choices=(('unpaid','unpaid'),
         ('partial','partial'),
@@ -21,7 +21,6 @@ class ExpenseTransaction(TransactionModel):
     account_type = models.CharField(max_length=32)
     account_number = models.CharField(max_length=32)
     user_id = models.CharField(max_length=32)
-    amount_left = models.FloatField(default=0)
 
 
     def payout(self):
@@ -32,4 +31,4 @@ class ExpenseTransaction(TransactionModel):
         verbose_name_plural = _('Forex Transactions')
 
     def __str__(self):
-        return self.customer
+        return self.customer.name

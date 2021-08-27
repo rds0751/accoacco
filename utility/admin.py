@@ -78,10 +78,10 @@ class VatAdmin(admin.ModelAdmin):
         return {}
 
 
-ra_admin_site.register(UserProfile, UserProfileAdmin)
-ra_admin_site.register(Company, CompanyAdmin)
-ra_admin_site.register(PredfinedPointsRule, PredfinedPointsRuleAdmin)
-ra_admin_site.register(Unit, UnitAdmin)
-ra_admin_site.register(BusinessType, BusinessTypeAdmin)
-ra_admin_site.register(Tax, TaxAdmin)
-ra_admin_site.register(Vat, VatAdmin)
+# ra_admin_site.register(UserProfile, UserProfileAdmin)
+# ra_admin_site.register(Company, CompanyAdmin)
+# ra_admin_site.register(PredfinedPointsRule, PredfinedPointsRuleAdmin)
+# ra_admin_site.register(Unit, UnitAdmin)
+# ra_admin_site.register(BusinessType, BusinessTypeAdmin)
+# ra_admin_site.register(Tax, TaxAdmin)
+# ra_admin_site.register(Vat, VatAdmin)

@@ -31,6 +31,6 @@ class TaskPerformedAdmin(admin.ModelAdmin):
 class OverTimeAdmin(admin.ModelAdmin):
     model = OverTime    
 
-ra_admin_site.register(Project, ProjectAdmin) 
-ra_admin_site.register(TaskPerformed, TaskPerformedAdmin) 
-ra_admin_site.register(OverTime, OverTimeAdmin)          
+# ra_admin_site.register(Project, ProjectAdmin) 
+# ra_admin_site.register(TaskPerformed, TaskPerformedAdmin) 
+# ra_admin_site.register(OverTime, OverTimeAdmin)          

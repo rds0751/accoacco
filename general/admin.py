@@ -7,7 +7,7 @@ from import_export import resources
 class GeneralResource(resources.ModelResource):
     class Meta:
         model = ExpenseTransaction
-        fields = [ 'customer', 'employee', 'value','type','doc_date','status','percent_per_month','amount_left', 'notes']
+        fields = ['id', 'customer', 'employee', 'value','type','doc_date','status','percent_per_month','amount_left', 'notes']
 
 class GeneralTransactionAdmin(ImportExportModelAdmin):
     model = ExpenseTransaction

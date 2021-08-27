@@ -25,6 +25,6 @@ class LeaveAdmin(admin.ModelAdmin):
     model = Leave
 
 
-ra_admin_site.register(Attendance, AttendanceAdmin) 
-ra_admin_site.register(LeaveApplication, LeaveApplicationAdmin) 
-ra_admin_site.register(Leave, LeaveAdmin)      
+# ra_admin_site.register(Attendance, AttendanceAdmin) 
+# ra_admin_site.register(LeaveApplication, LeaveApplicationAdmin) 
+# ra_admin_site.register(Leave, LeaveAdmin)      

@@ -31,4 +31,4 @@ class ExpenseTransaction(TransactionModel):
         verbose_name_plural = _('General Transactions')
 
     def __str__(self):
-        return self.customer
+        return self.sponsor

@@ -64,6 +64,11 @@ class EmployeeAdmin(EntityAdmin):
     inlines = [ChildrenInline,DisciplinaryActionInline,DistrictInline,
                       EducationInline,TrainingInline,LanguagesInline,AddressInline,
                       PromotionsInline,Rest_of_recreationInline,Retirement_yearInline,ServiceHistoryInline,Employee_AchievementInline]
+    def get_model_perms(self, request):
+        """
+        Return empty perms dict thus hiding the model from admin index.
+        """
+        return {}
 
 
 ra_admin_site.register(Employee, EmployeeAdmin) 

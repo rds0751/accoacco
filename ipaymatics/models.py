@@ -8,23 +8,20 @@ from ra.base.registry import register_doc_type
 from django.utils.translation import ugettext_lazy as _
 
 
-class Sale(TransactionModel):
-    customer         = models.ForeignKey(Customer, related_name='ipaymatics_customer', blank=True, null=True,on_delete=models.CASCADE)
-    seller           = models.ForeignKey(Employee, related_name='ipaymatics_seller', blank=True, null=True,on_delete=models.CASCADE)
-    status           = models.CharField(max_length=32, choices=(('order_submitted','order_submitted'),
-        ('completed','completed'),
-        ('order_cancel','order_cancel')
-        ), blank=True)
+class ExpenseTransaction(TransactionModel):
+    customer         = models.CharField(max_length=256, blank=True, null=True)
+    employee           = models.ForeignKey(Employee, related_name='ipaymatics_transaction_employee', blank=True, null=True,on_delete=models.CASCADE)
+    status           = models.CharField(max_length=32, choices=(('unpaid','unpaid'),
+        ('partial','partial'),
+        ('completed','completed')
+        ), blank=True, null=True)
+    sponsor = models.ForeignKey(Customer, related_name='ipaymatics_transaction_sponsor', null=True, blank=True, on_delete=models.CASCADE)
+    amount_left = models.IntegerField(default=0)
+    upline = models.CharField(max_length=32, null=True)
+    userID = models.CharField(max_length=32, null=True)
+    contact = models.CharField(max_length=32, null=True)
+
 
     class Meta:
-        verbose_name = _('Sale')
-        verbose_name_plural = _('Sales')
-
-class SaleProducts(QuantitativeTransactionItemModel):
-    sale         = models.ForeignKey(Sale, related_name='ipaymatics_sale', blank=True, null=True,on_delete=models.CASCADE)
-    date_added   = models.DateField( blank=True, null=True)
-    slug         = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        verbose_name = _('Total amount')
-        verbose_name_plural = _('total amount')
+        verbose_name = _('Ipaymatics Transaction')
+        verbose_name_plural = _('Ipaymatics Transactions')

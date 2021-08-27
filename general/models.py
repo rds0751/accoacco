@@ -23,8 +23,8 @@ class ExpenseTransaction(TransactionModel):
         ('debit','debit')
         ), blank=True)
 
-    def payout(self):
-    	return self.percent_per_month * self.value / 100
+    # def payout(self):
+    # 	return self.percent_per_month * self.value / 100
 
     class Meta:
         verbose_name = _('General Transaction')

@@ -36,3 +36,32 @@ class ExpenseTransaction(TransactionModel):
 
     # def __str__(self):
     #     return self.customer
+
+class NewExpenseTransaction(TransactionModel):
+    customer         = models.CharField(max_length=256, blank=True, null=True)
+    employee           = models.ForeignKey(Employee, related_name='daily_transaction_employee', blank=True, null=True,on_delete=models.CASCADE)
+    status           = models.CharField(max_length=32, choices=(('unpaid','unpaid'),
+        ('partial','partial'),
+        ('completed','completed')
+        ), blank=True, null=True)
+    percent_per_month = models.DecimalField(max_digits=5, decimal_places=2, null=True)
+    sponsor = models.ForeignKey(Customer, related_name='daily_transaction_sponsor', null=True, blank=True, on_delete=models.CASCADE)
+    amount_left = models.IntegerField(default=0)
+    type = models.CharField(max_length=32, choices=(('cheque','cheque'),
+        ('credit','credit'),
+        ('debit','debit')
+        ), blank=True, null=True)
+
+    def payout(self):
+        try:
+            a = self.percent_per_month * self.value / 100
+        except Exception as e:
+            a = 0
+        return a
+
+    class Meta:
+        verbose_name = _('Daily Transaction')
+        verbose_name_plural = _('Daily Transactions')
+
+    # def __str__(self):
+    #     return self.customer

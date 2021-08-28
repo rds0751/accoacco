@@ -1,4 +1,4 @@
-from .models import ExpenseTransaction
+from .models import ExpenseTransaction, NewExpenseTransaction
 from import_export.admin import ImportExportModelAdmin
 from ra.admin.admin import ra_admin_site, EntityAdmin, TransactionAdmin, TransactionItemAdmin
 from django import forms
@@ -17,4 +17,12 @@ class GeneralTransactionAdmin(ImportExportModelAdmin):
     list_display_links = ('customer', 'employee')
     search_fields = ('customer', 'notes')
 
+class NewTransactionAdmin(ImportExportModelAdmin):
+    model = NewExpenseTransaction
+    list_display = [ 'customer', 'employee', 'value','type','creation_date','status','percent_per_month','payout','amount_left']
+    fields = [ 'customer', 'employee', 'value','type','doc_date','status','percent_per_month','amount_left', 'notes']
+    list_display_links = ('customer', 'employee')
+    search_fields = ('customer', 'notes')
+
 ra_admin_site.register(ExpenseTransaction, GeneralTransactionAdmin)
+ra_admin_site.register(NewExpenseTransaction, NewTransactionAdmin)

@@ -19,8 +19,8 @@ class GeneralTransactionAdmin(ImportExportModelAdmin):
 
 class NewTransactionAdmin(ImportExportModelAdmin):
     model = NewExpenseTransaction
-    list_display = [ 'customer', 'employee', 'value','type','creation_date','status','percent_per_month','payout','amount_left']
-    fields = [ 'customer', 'employee', 'value','type','doc_date','status','percent_per_month','amount_left', 'notes']
+    list_display = [ 'customer','employee', 'value','type','creation_date']
+    fields = [ 'customer','employee', 'value','type','doc_date','notes']
     list_display_links = ('customer', 'employee')
     search_fields = ('customer', 'notes')
 

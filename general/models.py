@@ -40,13 +40,6 @@ class ExpenseTransaction(TransactionModel):
 class NewExpenseTransaction(TransactionModel):
     customer         = models.CharField(max_length=256, blank=True, null=True)
     employee           = models.ForeignKey(Employee, related_name='daily_transaction_employee', blank=True, null=True,on_delete=models.CASCADE)
-    status           = models.CharField(max_length=32, choices=(('unpaid','unpaid'),
-        ('partial','partial'),
-        ('completed','completed')
-        ), blank=True, null=True)
-    percent_per_month = models.DecimalField(max_digits=5, decimal_places=2, null=True)
-    sponsor = models.ForeignKey(Customer, related_name='daily_transaction_sponsor', null=True, blank=True, on_delete=models.CASCADE)
-    amount_left = models.IntegerField(default=0)
     type = models.CharField(max_length=32, choices=(('cheque','cheque'),
         ('credit','credit'),
         ('debit','debit')

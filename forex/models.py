@@ -20,6 +20,7 @@ class ExpenseTransaction(TransactionModel):
     amount_left = models.IntegerField(default=0)
     account_type = models.CharField(max_length=32)
     account_number = models.CharField(max_length=32)
+    email = models.EmailField(null=True, blank=True)
     user_id = models.CharField(max_length=32)
     type = models.CharField(max_length=32, choices=(('cheque','cheque'),
         ('credit','credit'),

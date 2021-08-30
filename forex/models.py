@@ -18,8 +18,8 @@ class ExpenseTransaction(TransactionModel):
     percent_per_month = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     sponsor = models.ForeignKey(Customer, related_name='Forex_transaction_sponsor', null=True, blank=True, on_delete=models.CASCADE)
     amount_left = models.IntegerField(default=0)
-    account_type = models.CharField(max_length=32, null=True)
-    account_number = models.CharField(max_length=32, null=True)
+    account_type = models.CharField(max_length=32, null=True, blank=True)
+    account_number = models.CharField(max_length=32, null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
     user_id = models.CharField(max_length=32)
     type = models.CharField(max_length=32, choices=(('cheque','cheque'),

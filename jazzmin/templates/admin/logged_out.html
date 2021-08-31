@@ -56,8 +56,6 @@
     <div class="card">
         <div class="card-body">
             <p class="login-box-msg">Logged Out</p>
-            <form action="{{ app_path }}" method="post">
-                {% csrf_token %}
                 <div class="row">
                     <div class="col-12">
                         <a href="{% url 'admin:login' %}" type="submit" class="btn {{ jazzmin_ui.button_classes.primary }} btn-block">{% trans "Login Again" %}</button>

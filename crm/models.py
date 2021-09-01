@@ -26,6 +26,10 @@ class Customer(EntityModel):
     def get_full_name(self):
           return self.user.first_name+" "+self.user.last_name
 
+    class Meta:
+        verbose_name = 'Account'
+        verbose_name_plural = 'Accounts'
+
 class Supplier(UserProfileBaseModel):
     user              = models.OneToOneField(User, related_name="Supplier", on_delete=models.CASCADE)
     BillingAddress    = models.ForeignKey(BillingAddress, related_name="SupplierBillingAddress", blank=True, null=True,on_delete=models.CASCADE)
@@ -36,7 +40,7 @@ class Supplier(UserProfileBaseModel):
           return self.user.first_name+" "+self.user.last_name
     
     def __str__(self):
-          return self.user.username  
+          return self.user.username
 
          
   

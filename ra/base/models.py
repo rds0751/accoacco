@@ -76,8 +76,7 @@ class EntityModel(RAModel):
     The Main base for Ra `static` models
     Example: Client , Expense etc..
     """
-    slug = models.SlugField(_('Identifier slug'), help_text=_('For fast recall'), max_length=50,
-                            unique=True, db_index=True, blank=True)
+    slug = models.SlugField(_('Identifier slug'), help_text=_('For fast recall'), max_length=50, db_index=True, validators=[], blank=True)
     title = models.CharField(_('Name'), max_length=255, unique=True, db_index=True)
     notes = models.TextField(_('Notes'), null=True, blank=True)
 

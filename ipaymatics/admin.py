@@ -15,7 +15,7 @@ class IpaymaticsTransactionAdmin(TransactionAdmin):
     model = ExpenseTransaction
     resource_class = IpaymaticsResource
     list_display = [  'customer','upline', 'userID', 'contact',  'employee', 'value','creation_date','status','amount_left']
-    fields = [  'customer','upline', 'userID', 'contact',  'employee', 'value','doc_date','status','amount_left','notes']
+    fields = [  'customer', 'customer_account', 'upline', 'userID', 'contact',  'employee', 'value','doc_date','status','amount_left','notes']
     list_display_links = ( 'customer', 'employee')
     search_fields = ( 'customer', 'notes')
 

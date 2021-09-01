@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 
 class ExpenseTransaction(TransactionModel):
     customer         = models.CharField(max_length=200, null=True)
+    customer_account = models.ForeignKey(Customer, related_name='Forex_transaction_customer', blank=True, null=True,on_delete=models.CASCADE)
     employee           = models.ForeignKey(Employee, related_name='Forex_transaction_employee', blank=True, null=True,on_delete=models.CASCADE)
     status           = models.CharField(max_length=32, choices=(('unpaid','unpaid'),
         ('partial','partial'),

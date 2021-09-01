@@ -82,7 +82,23 @@
 {#                        {% endfor %}#}
 {#                    {% endif %}#}
                     {% if user.is_authenticated %}
-                        {% render_reports_menu %}
+                    <li class="nav-item has-treeview menu-is-opening menu-open">
+                        <a class="nav-link " href="">
+                            <i class="nav-icon fas fa-chart-line"> </i>
+                            <p>
+                                Reports
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: block;">
+                            <li class="nav-item ">
+                                <a href="/reports/clients/" class="nav-link ">
+                                    <i class="fa nav-icon {% if model.icon %} {{ model.icon }} {% else %}fa-circle{% endif %}"></i>
+                                    <p>Customer Report</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     {% endif %}
                 </ul>
             </nav>

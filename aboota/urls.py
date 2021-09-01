@@ -18,11 +18,15 @@ from django.urls import path
 from ra.admin.admin import ra_admin_site
 from debug_toolbar import urls as durls
 from django.conf.urls import include
+from reports import views
 
 handler500 = 'ra.utils.views.server_error'
 handler404 = 'ra.utils.views.not_found_error'
 
 urlpatterns = [
+    path('ajax/validate_username/', views.validate_username),
+    path('reports/clients/', views.accountp),
+    path('reports/projects/', views.txntype),
     path('', ra_admin_site.urls),
     path('__debug__/', include(durls), name='debug_toolbar'),
 ]

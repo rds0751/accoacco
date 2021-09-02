@@ -17,6 +17,11 @@ class GeneralTransactionAdmin(ImportExportModelAdmin):
     list_display_links = ('customer', 'employee')
     search_fields = ('customer', 'notes')
 
+
+    def get_queryset(self, request):
+        qs = super(GeneralTransactionAdmin, self).get_queryset(request)
+        return qs.filter(owner=request.user)
+
 class NewTransactionAdmin(ImportExportModelAdmin):
     model = NewExpenseTransaction
     list_display = [ 'customer','employee', 'value','type','creation_date']
@@ -24,5 +29,10 @@ class NewTransactionAdmin(ImportExportModelAdmin):
     list_display_links = ('customer', 'employee')
     search_fields = ('customer', 'notes')
 
+
+    def get_queryset(self, request):
+        qs = super(NewTransactionAdmin, self).get_queryset(request)
+        return qs.filter(owner=request.user)
+
 ra_admin_site.register(ExpenseTransaction, GeneralTransactionAdmin)
-ra_admin_site.register(NewExpenseTransaction, NewTransactionAdmin)
+# ra_admin_site.register(NewExpenseTransaction, NewTransactionAdmin)

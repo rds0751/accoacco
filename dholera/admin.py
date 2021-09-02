@@ -15,6 +15,10 @@ class DholeraTransactionAdmin(TransactionAdmin):
     list_display_links = ('customer', 'employee')
     search_fields = ('customer', 'notes')
 
+    def get_queryset(self, request):
+        qs = super(DholeraTransactionAdmin, self).get_queryset(request)
+        return qs.filter(owner=request.user)
+
 
 class CategoryAdmin(admin.ModelAdmin):
     model = Category

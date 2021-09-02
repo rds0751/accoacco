@@ -20,9 +20,6 @@ from debug_toolbar import urls as durls
 from django.conf.urls import include
 from reports import views
 
-handler500 = 'ra.utils.views.server_error'
-handler404 = 'ra.utils.views.not_found_error'
-
 urlpatterns = [
     path('ajax/validate_username/', views.validate_username),
     path('reports/clients/', views.accountp),

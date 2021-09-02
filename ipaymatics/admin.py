@@ -19,4 +19,8 @@ class IpaymaticsTransactionAdmin(TransactionAdmin):
     list_display_links = ( 'customer', 'employee')
     search_fields = ( 'customer', 'notes')
 
+    def get_queryset(self, request):
+        qs = super(IpaymaticsTransactionAdmin, self).get_queryset(request)
+        return qs.filter(owner=request.user)
+
 ra_admin_site.register(ExpenseTransaction, IpaymaticsTransactionAdmin)

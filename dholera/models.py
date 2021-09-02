@@ -2,6 +2,7 @@ from django.db import models
 from hr.models import Employee
 from utility.models import Unit,BaseModel
 from crm.models  import Supplier,Customer,BillingAddress
+from import_export.admin import ImportExportModelAdmin
 
 from django.utils.translation import ugettext_lazy as _
 from ra.base.models import EntityModel, TransactionModel, TransactionItemModel, QuantitativeTransactionItemModel

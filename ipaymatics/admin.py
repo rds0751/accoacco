@@ -6,14 +6,8 @@ from import_export.admin import ImportExportModelAdmin
 
 from import_export import resources
 
-class IpaymaticsResource(ImportExportModelAdmin):
-    class Meta:
-        model = ExpenseTransaction
-        fields = [  'customer','upline', 'userID', 'contact',  'employee', 'value','status','amount_left','notes']
-
-class IpaymaticsTransactionAdmin(TransactionAdmin):
+class IpaymaticsTransactionAdmin(ImportExportModelAdmin):
     model = ExpenseTransaction
-    resource_class = IpaymaticsResource
     list_display = [  'customer','upline', 'userID', 'contact',  'employee', 'value','creation_date','status','amount_left']
     fields = [  'customer', 'customer_account', 'upline', 'userID', 'contact',  'employee', 'value','doc_date','status','amount_left','notes']
     list_display_links = ( 'customer', 'employee')

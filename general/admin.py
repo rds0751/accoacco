@@ -35,4 +35,4 @@ class NewTransactionAdmin(ImportExportModelAdmin):
         return qs.filter(owner=request.user)
 
 ra_admin_site.register(ExpenseTransaction, GeneralTransactionAdmin)
-# ra_admin_site.register(NewExpenseTransaction, NewTransactionAdmin)
+ra_admin_site.register(NewExpenseTransaction, NewTransactionAdmin)

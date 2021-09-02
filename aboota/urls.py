@@ -13,12 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
- 
 from django.urls import path
 from ra.admin.admin import ra_admin_site
 from debug_toolbar import urls as durls
 from django.conf.urls import include
 from reports import views
+
+handler500 = 'ra.utils.views.server_error'
+handler404 = 'ra.utils.views.not_found_error'
 
 urlpatterns = [
     path('ajax/validate_username/', views.validate_username),

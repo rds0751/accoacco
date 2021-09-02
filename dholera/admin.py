@@ -1,5 +1,6 @@
 from django.contrib import admin
 from ra.admin.admin import ra_admin_site, TransactionAdmin, TransactionItemAdmin
+from import_export.admin import ImportExportModelAdmin
 
 from dholera.models  import Category
 # Register your models here.
@@ -8,7 +9,7 @@ from .models import ExpenseTransaction
 from ra.admin.admin import ra_admin_site, EntityAdmin, TransactionAdmin, TransactionItemAdmin
 from django import forms
 
-class DholeraTransactionAdmin(TransactionAdmin):
+class DholeraTransactionAdmin(ImportExportModelAdmin):
     model = ExpenseTransaction
     list_display = ['customer', 'employee','project', 'plot_number', 'value','creation_date','status','amount_left']
     fields = ['customer', 'customer_account', 'employee','project', 'plot_number', 'value','doc_date','status','amount_left', 'notes']

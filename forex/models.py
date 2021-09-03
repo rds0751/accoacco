@@ -24,8 +24,8 @@ class ExpenseTransaction(TransactionModel):
     email = models.EmailField(null=True, blank=True)
     user_id = models.CharField(max_length=32)
     type = models.CharField(max_length=32, choices=(('cheque','cheque'),
-        ('credit','credit'),
-        ('debit','debit')
+        ('credit','deposit'),
+        ('debit','withdraw')
         ), blank=True, null=True)
 
 

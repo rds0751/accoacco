@@ -12,6 +12,9 @@ class GeneralTransactionAdmin(ImportExportModelAdmin):
 
     def get_queryset(self, request):
         qs = super(GeneralTransactionAdmin, self).get_queryset(request)
-        return qs.filter(owner=request.user)
+        if request.user.is_superuser:
+            return qs.filter()
+        else:
+            return qs.filter(owner=request.user)
 
 ra_admin_site.register(ExpenseTransaction, GeneralTransactionAdmin)

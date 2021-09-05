@@ -18,7 +18,10 @@ class DholeraTransactionAdmin(ImportExportModelAdmin):
 
     def get_queryset(self, request):
         qs = super(DholeraTransactionAdmin, self).get_queryset(request)
-        return qs.filter(owner=request.user)
+        if request.user.is_superuser:
+            return qs.filter()
+        else:
+            return qs.filter(owner=request.user)
 
 
 class CategoryAdmin(admin.ModelAdmin):

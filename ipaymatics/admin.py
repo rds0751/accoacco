@@ -15,6 +15,9 @@ class IpaymaticsTransactionAdmin(ImportExportModelAdmin):
 
     def get_queryset(self, request):
         qs = super(IpaymaticsTransactionAdmin, self).get_queryset(request)
-        return qs.filter(owner=request.user)
+        if request.user.is_superuser:
+            return qs.filter()
+        else:
+            return qs.filter(owner=request.user)
 
 ra_admin_site.register(ExpenseTransaction, IpaymaticsTransactionAdmin)

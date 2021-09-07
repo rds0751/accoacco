@@ -259,7 +259,8 @@ class TransactionModel(EntityModel):
     doc_date = models.DateTimeField(_('date'), db_index=True)
     doc_type = models.CharField(max_length=30, db_index=True)
     notes = models.TextField(_('notes'), null=True, blank=True)
-    value = models.DecimalField(_('value'), max_digits=19, decimal_places=2, default=0)
+    value = models.DecimalField(max_digits=19, decimal_places=2, default=0, verbose_name="Value INR")
+    value1 = models.DecimalField(max_digits=19, decimal_places=2, default=0, verbose_name="Value USD")
 
     owner = models.ForeignKey(User, related_name='%(app_label)s_%(class)s_related', verbose_name=_('owner'),
                               on_delete=models.CASCADE)

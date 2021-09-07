@@ -9,7 +9,7 @@ from import_export import resources
 class IpaymaticsTransactionAdmin(ImportExportModelAdmin):
     model = ExpenseTransaction
     list_display = [  'customer','upline', 'userID', 'contact',  'employee', 'value','creation_date','status','amount_left']
-    fields = [  'customer', 'customer_account', 'upline', 'userID', 'contact',  'employee', 'value','doc_date','status','amount_left','notes']
+    fields = [  'customer', 'customer_account', 'upline', 'userID', 'contact',  'employee', 'value','value1','doc_date','status','amount_left','notes']
     list_display_links = ( 'customer', 'employee')
     search_fields = ( 'customer', 'notes')
 

@@ -61,3 +61,15 @@ class NewExpenseTransaction(TransactionModel):
 
     # def __str__(self):
     #     return self.customer
+
+class NewExpenseTransaction1(TransactionModel):
+    customer         = models.CharField(max_length=256, blank=True, null=True)
+    account = models.ForeignKey(Customer, related_name='withdrawal_customer', blank=True, null=True,on_delete=models.CASCADE)
+    employee           = models.ForeignKey(Employee, related_name='withdrawal_employee', blank=True, null=True,on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = _('Withdrawal')
+        verbose_name_plural = _('Withdrawals')
+
+    # def __str__(self):
+    #     return self.customer

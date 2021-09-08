@@ -43,7 +43,7 @@ class NewTransactionAdmin(ImportExportModelAdmin):
 class NewTransactionAdmin1(ImportExportModelAdmin):
     model = NewExpenseTransaction1
     list_display = [ 'customer','employee', 'value','creation_date']
-    fields = [ 'customer', 'account', 'employee', 'value','value1','doc_date','notes']
+    fields = [ 'customer', 'account', 'employee', 'value','value1','doc_date','notes', 'image']
     list_display_links = ('customer', 'employee')
     search_fields = ('customer', 'notes')
 

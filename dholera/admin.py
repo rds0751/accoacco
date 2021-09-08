@@ -12,7 +12,7 @@ from django import forms
 class DholeraTransactionAdmin(ImportExportModelAdmin):
     model = ExpenseTransaction
     list_display = ['customer', 'employee','project', 'plot_number', 'value','creation_date','status','amount_left']
-    fields = ['customer', 'customer_account', 'employee','project', 'plot_number', 'value','doc_date','status','amount_left', 'notes']
+    fields = ['customer', 'customer_account', 'employee','project', 'plot_number', 'value', 'value1', 'doc_date','status','amount_left', 'notes']
     list_display_links = ('customer', 'employee')
     search_fields = ('customer', 'notes')
 
